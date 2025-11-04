@@ -53,10 +53,7 @@ fun HandleOrientationChanges(){
 }
 
 /**
- * Función principal que contiene la lógica del Quiz (banco de preguntas y estado).
- * Esto evita duplicar la lógica en Portrait y Landscape y mejora la optimización.
- *
- * @param isLandscape Indica si se debe usar el layout horizontal (true) o vertical (false).
+ * @param isLandscape Indicates layout type horizontal (true) vertical (false).
  */
 @Composable
 fun QuizLogic(isLandscape: Boolean) {
@@ -71,19 +68,16 @@ fun QuizLogic(isLandscape: Boolean) {
         Question(R.string.question_oceans, true)
     )
 
-    //Reminds the state
     var currentIndex by rememberSaveable { mutableIntStateOf(0) }
 
     val currentQuestion = mQuestionBank[currentIndex]
 
-    // Función para manejar la respuesta del usuario
     val onAnswerClicked: (Boolean) -> Unit = { userAnswer ->
         val isCorrect = userAnswer == currentQuestion.answer
         val msg = if (isCorrect) context.getString(R.string.toast_correct) else context.getString(R.string.toast_incorrect)
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
-    // Función para avanzar a la siguiente pregunta
     val onNextClicked: () -> Unit = {
         currentIndex = (currentIndex + 1) % mQuestionBank.size
     }
@@ -96,7 +90,6 @@ fun QuizLogic(isLandscape: Boolean) {
 }
 
 
-// --- Diseño Vertical (Portrait) ---
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -121,14 +114,14 @@ fun PortraitLayout(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                // Pregunta
+
                 Text(
                     stringResource(currentQuestion.textResId),
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(bottom = 24.dp)
                 )
-                // Botones de respuesta
+
                 Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     FilledTonalButton(onClick = { onAnswerClicked(true) }) {
                         Text(stringResource(R.string.btnTrue))
@@ -140,7 +133,7 @@ fun PortraitLayout(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Botón Siguiente
+
                 Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                     FilledTonalButton(onClick = onNextClicked) {
                         Text(text = stringResource(R.string.btnNext))
@@ -152,7 +145,6 @@ fun PortraitLayout(
 }
 
 
-// --- Diseño Horizontal (Landscape) ---
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -168,31 +160,30 @@ fun LandscapeLayout(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 8.dp) // Reducir padding en horizontal
+                .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            // Contenedor principal para la pregunta y botones
             Row(
                 modifier = Modifier
-                    .align(Alignment.Center) // Centrar el Row
-                    .fillMaxWidth(0.9f), // Usar un porcentaje del ancho
+                    .align(Alignment.Center)
+                    .fillMaxWidth(0.9f),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Columna para la Pregunta (ocupa más espacio)
+
                 Column(
-                    modifier = Modifier.weight(2f), // Más peso para la pregunta
+                    modifier = Modifier.weight(2f),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         stringResource(currentQuestion.textResId),
-                        fontSize = 16.sp, // Fuente un poco más pequeña
+                        fontSize = 16.sp,
                         textAlign = TextAlign.Center
                     )
                 }
 
-                // Columna para los Botones (ocupa menos espacio)
+
                 Column(
-                    modifier = Modifier.weight(1f), // Menos peso para los botones
+                    modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
@@ -206,7 +197,7 @@ fun LandscapeLayout(
                 }
             }
 
-            // Botón "Next" en la esquina inferior derecha
+
             FilledTonalButton(
                 onClick = onNextClicked,
                 modifier = Modifier
