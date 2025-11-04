@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">GeoQuizJetpack</string>
+    <string name="btnFalse">FALSE</string>
+    <string name="btnNext">NEXT</string>
+    <string name="btnTrue">TRUE</string>
+    <string name="question_africa">The Nile River is the longest river in the world, located in Africa.</string>
+    <string name="question_americas">The Amazon Rainforest is located entirely in South America.</string>
+    <string name="question_asia">The Gobi Desert is located in Asia.</string>
+    <string name="question_australia">Canberra is the capital of Australia.</string>
+    <string name="question_mideast">All countries in the Middle East are predominantly Muslim.</string>
+    <string name="question_oceans">The Pacific Ocean is the largest and deepest ocean basin in the world.</string>
+    <string name="toast_correct">Correct!</string>
+    <string name="toast_incorrect">Incorrect!</string>
+    <style name="Theme.GeoQuizJetPack" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>
